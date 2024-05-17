@@ -1,10 +1,12 @@
 package marco.example;
 
+import java.util.Objects;
+
 public class Customer {
 
-    private String name;
-    private String email;
-    private String address;
+    private final String name;
+    private final String email;
+    private final String address;
 
     public Customer(String name, String email, String address) {
         this.name = name;
@@ -20,18 +22,6 @@ public class Customer {
         return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -43,5 +33,18 @@ public class Customer {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(getName(), customer.getName()) && Objects.equals(getEmail(), customer.getEmail()) && Objects.equals(getAddress(), customer.getAddress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getEmail(), getAddress());
     }
 }

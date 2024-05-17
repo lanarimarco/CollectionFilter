@@ -5,15 +5,17 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Customers {
+public class CustomersFilterByMap implements CustomersFilter {
 
     private Collection<Customer> customers;
 
+    // The key of these maps are the concatenation of the fields that we want to filter by
+    // In general we will have a map for each combination of fields that we want to filter by
     private Map<String, Collection<Customer>> customersByName = new HashMap<>();
     private Map<String, Collection<Customer>> customersByNameAndEmail = new HashMap<>();
     private Map<String, Collection<Customer>> customersByNameAndEmailAndAddress = new HashMap<>();
 
-    public Customers(Collection<Customer> customers) {
+    public CustomersFilterByMap(Collection<Customer> customers) {
         this.customers = customers;
         for (Customer customer : customers) {
             addKey(customersByName, customer, customer.getName());
